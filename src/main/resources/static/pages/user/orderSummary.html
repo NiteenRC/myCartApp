@@ -1,0 +1,27 @@
+<div align="center">
+	<div data-ng-show="isProductOrdered">
+		<div align="center">
+			<br>
+			<h4>
+				Thank You for shopping with us!! <br> <br>Order No: <b>{{orderInfo.orderNo}}</b>
+			</h4>
+			<h4>
+				Your Booking Order Date: <b>{{orderInfo.orderBookingDate| date}}</b>
+			</h4>
+			<br> <br>
+			<h5>
+				<i>Note: By Order No You can track further.</i>
+			</h5>
+			<div class="container">
+				<p class="text-info">
+					<button onclick="window.location.href='#categorys'">
+						<i class="icon-chevron-left"></i> back to Shopping Cart
+					</button>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div data-ng-show="!isProductOrdered">
+		<h4>You have not done any order yet</h4>
+	</div>
+</div>

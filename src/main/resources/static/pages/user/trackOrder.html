@@ -1,0 +1,38 @@
+<div align="center">
+
+	<form name="myForm" novalidate>
+		<input type="text" data-ng-model="orderNo"
+			placeholder="Search by Order No" class="description" required>
+
+		<button data-ng-click="trackOrderNo()"
+			data-ng-disabled="myForm.$invalid">Submit</button>
+	</form>
+
+	<br> <br>
+	<div data-ng-show="isOrderTracked">
+		<h4>
+			Product Name: <b>{{orderTrack.purchaseOrderDetail.productName}}</b>
+		</h4>
+		<h4>
+			Your Booking Order Date: <b>{{orderTrack.orderBookingDate| date}}</b>
+		</h4>
+		<h4>
+			Your Booking Order Status: <b>{{orderTrack.orderStatus| date}}</b>
+		</h4>
+	</div>
+	<br> <br>
+	<div data-ng-show="errorMessage!=''">
+		<h4>You have not done any order</h4>
+		<h4>
+			Please verify your order: <b>{{orderNo}}</b>
+		</h4>
+	</div>
+
+	<div class="container">
+		<p class="text-info">
+			<button onclick="window.location.href='#categorys'">
+				<i class="icon-chevron-left"></i> back to Shopping Cart
+			</button>
+		</p>
+	</div>
+</div>
