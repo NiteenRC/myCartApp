@@ -7,6 +7,7 @@ function userController($scope, $http, $location, $window, sharedService,
 	'use strict'
 
 	$rootScope.userLoggedin = false;
+	$rootScope.userID = '';
 	$rootScope.userName = '';
 	$rootScope.userType = '';
 	$rootScope.userDetails = null;
@@ -31,6 +32,8 @@ function userController($scope, $http, $location, $window, sharedService,
 						$scope.isRegistrationRequired = false;
 						$rootScope.userName = userDetails.data.userName;
 						$rootScope.userLoggedin = true;
+						$window.sessionStorage.setItem("userID",
+								userDetails.data.userId);
 						$window.sessionStorage.setItem("userName",
 								userDetails.data.userName)
 						$window.sessionStorage.setItem("userType",
@@ -100,6 +103,7 @@ function userController($scope, $http, $location, $window, sharedService,
 	}
 
 	$scope.invalidateUser = function() {
+		$window.sessionStorage.setItem("userID", '');
 		$window.sessionStorage.setItem("userName", '');
 		$window.sessionStorage.setItem("userType", '');
 		$rootScope.userLoggedin = false;
@@ -107,6 +111,7 @@ function userController($scope, $http, $location, $window, sharedService,
 	}
 
 	$scope.getUserNamerfromCookie = function() {
+		$rootScope.userID = $window.sessionStorage.getItem("userID");
 		$rootScope.userName = $window.sessionStorage.getItem("userName");
 		$rootScope.userType = $window.sessionStorage.getItem("userType");
 	}

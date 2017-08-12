@@ -2,13 +2,11 @@ angular.module('scotchApp.orderSummary_module',
 		[ 'scotchApp.shared_module.sharedService' ]).controller(
 		'orderSummaryController', orderSummaryController);
 
-function orderSummaryController($scope, sharedService, $location) {
+function orderSummaryController($scope, sharedService, $rootScope) {
 	'use strict'
 
-	$scope.getDate = getDate();
-	$scope.trackOrderNo = trackOrderNo;
-
 	var ORDER_URL = "/order/";
+	var ORDER_BY_USER = "/order/byUser/";
 
 	function getDate() {
 		var today = new Date();
@@ -26,7 +24,13 @@ function orderSummaryController($scope, sharedService, $location) {
 
 	$scope.orderInfo = sharedService.get('orderInfo');
 
+	$scope.isOrderPlaced = sharedService.get('isOrderPlaced');
+
 	$scope.isProductOrdered = false;
+
+	$scope.getDate = getDate();
+	$scope.trackOrderNo = trackOrderNo;
+	$scope.orderHistory = orderHistory;
 
 	if (sharedService.isDefinedOrNotNull($scope.orderInfo)) {
 		$scope.isProductOrdered = true;
@@ -37,6 +41,21 @@ function orderSummaryController($scope, sharedService, $location) {
 				function(response) {
 					$scope.orderTrack = response.data;
 					$scope.isOrderTracked = true;
+					// sharedService.store('orderInfo', '');
+					// sharedService.store('orderPlaced', true);
+				}, function(error) {
+					$scope.errorMessage = error.data.errorMessage;
+				});
+	}
+
+	$scope.isOrderHistory = false;
+
+	function orderHistory() {
+		sharedService.getAllMethod(ORDER_BY_USER + $rootScope.userID).then(
+				function(response) {
+					$scope.orderTrack = response.data;
+					$scope.isProductOrdered = false;
+					$scope.isOrderHistory = true;
 				}, function(error) {
 					$scope.errorMessage = error.data.errorMessage;
 				});

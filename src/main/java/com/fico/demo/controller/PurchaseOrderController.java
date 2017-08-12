@@ -41,8 +41,9 @@ public class PurchaseOrderController {
 
 		order.setOrderBookingDate(new Date());
 		order.setOrderNo("ORDERNO" + Utility.nextSessionId());
+		order.setUserID(orderVo.getUserID());
 		PurchaseOrder oder = orderRepo.save(order);
-
+		
 		List<PurchaseOrderDetail> orderDetail = orderVo.getPurchaseOrderDetail();
 
 		PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
@@ -76,9 +77,9 @@ public class PurchaseOrderController {
 		return new ResponseEntity(new CustomErrorType("Order is not done!!"), HttpStatus.NOT_FOUND);
 	}
 
-	@RequestMapping(value = WebUrl.ORDER, method = RequestMethod.GET)
-	public ResponseEntity<List<PurchaseOrder>> cartList() {
-		List<PurchaseOrder> productList = orderRepo.findAll();
+	@RequestMapping(value = WebUrl.ORDER_BY_USER + "{userID}", method = RequestMethod.GET)
+	public ResponseEntity<List<PurchaseOrder>> findAllOrdersByUser(@PathVariable String userID) {
+		List<PurchaseOrder> productList = orderRepo.findAllOrdersByUserID(Integer.parseInt(userID));
 		if (productList.isEmpty()) {
 			return new ResponseEntity(new CustomErrorType("Unable to find list"), HttpStatus.NO_CONTENT);
 		}

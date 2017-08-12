@@ -2,12 +2,11 @@ angular.module('scotchApp.cart_module',
 		[ 'scotchApp.shared_module.sharedService' ]).controller(
 		'cartController', cartController);
 
-function cartController($scope, $uibModal, sharedService, $location) {
+function cartController($scope, $rootScope, $uibModal, sharedService, $location) {
 	'use strict';
 
 	var cartUrl = "/cart/";
 	var ORDER_LIST_SAVE = "/order/saveOrders";
-	String
 	var CART_LIST_SAVE = "/cart/saveCarts";
 
 	getCarts();
@@ -43,6 +42,7 @@ function cartController($scope, $uibModal, sharedService, $location) {
 	} ];
 
 	$scope.orderVo = {
+		userID : parseInt($rootScope.userID),
 		purchaseOrder : $scope.order,
 		purchaseOrderDetail : $scope.purchaseOrderDetail
 	}
@@ -55,6 +55,7 @@ function cartController($scope, $uibModal, sharedService, $location) {
 				function(response) {
 					// $scope.orderInfo = response.data;
 					sharedService.store('orderInfo', response.data);
+					sharedService.store('isOrderPlaced', true);
 					$location.path("/orderSummary");
 				}, function(error) {
 					$scope.errorMessage = 'Error while creating' + error;

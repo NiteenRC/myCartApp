@@ -17,6 +17,7 @@ public interface WebUrl {
 	String CATEGORY_BY_PRODUCT_COUNT = "/category/productCount";
 	
 	String ORDER = "/order/";
+	String ORDER_BY_USER = "/order/byUser/";
 	String ORDER_LIST_SAVE = "/order/saveOrders";
 	
 	String RATING = "/rating/";

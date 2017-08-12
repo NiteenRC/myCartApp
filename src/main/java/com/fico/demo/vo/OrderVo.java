@@ -6,11 +6,20 @@ import com.fico.demo.model.PurchaseOrder;
 import com.fico.demo.model.PurchaseOrderDetail;
 
 public class OrderVo {
+	private int userID;
 	private PurchaseOrder purchaseOrder;
 	private List<PurchaseOrderDetail> purchaseOrderDetail;
 
 	public PurchaseOrder getPurchaseOrder() {
 		return purchaseOrder;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 	public void setPurchaseOrder(PurchaseOrder purchaseOrder) {

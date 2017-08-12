@@ -16,7 +16,7 @@ function productManageController($scope, $uibModal, sharedService) {
 
 	$scope.removeProduct = removeProduct;
 	$scope.placeOrder = placeOrderSelectedItem;
-	$scope.carts = getCart;
+	//$scope.carts = getCart;
 
 	$scope.openProductModal = openModal;
 	$scope.reset = reset;
@@ -79,14 +79,14 @@ function productManageController($scope, $uibModal, sharedService) {
 				});
 	}
 
-	function getCart() {
+	/*function getCart() {
 		sharedService.getMethod(cartUrl).then(function(response) {
 			$scope.cart = response.data;
 		}, function(error) {
 			$scope.errorMessage = 'Some thing went wrong';
 			$scope.successMessage = '';
 		});
-	}
+	}*/
 
 	function getProducts() {
 		sharedService.getAllMethod(productUrl).then(function(response) {
@@ -100,7 +100,8 @@ function productManageController($scope, $uibModal, sharedService) {
 	function getCategory() {
 		sharedService.getMethod(categoryUrl).then(function(response) {
 			$scope.categories = response.data;
-			sharedService.set(response.data);
+			//sharedService.set(response.data);
+			sharedService.store('categories', response.data);
 		}, function(error) {
 			$scope.errorMessage = 'Some thing went wrong';
 			$scope.successMessage = '';

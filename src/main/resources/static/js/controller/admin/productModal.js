@@ -9,8 +9,8 @@ function modalCtrl($scope, $http, $modalInstance, sharedService) {
 	$scope.saveProduct = saveProduct;
 	$scope.cancel = cancel;
 	$scope.clear = clear;
-	$scope.categories = sharedService.get();
-	$scope.i = $scope.item;
+	$scope.categories = sharedService.get('categories');
+	//$scope.i = $scope.item;
 
 	$scope.productData = {
 		productID : null,
