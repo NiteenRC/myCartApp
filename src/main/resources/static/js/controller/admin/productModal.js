@@ -10,7 +10,6 @@ function modalCtrl($scope, $http, $modalInstance, sharedService) {
 	$scope.cancel = cancel;
 	$scope.clear = clear;
 	$scope.categories = sharedService.get('categories');
-	//$scope.i = $scope.item;
 
 	$scope.productData = {
 		productID : null,

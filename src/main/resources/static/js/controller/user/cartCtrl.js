@@ -6,8 +6,8 @@ function cartController($scope, $rootScope, $uibModal, sharedService, $location)
 	'use strict';
 
 	var cartUrl = "/cart/";
-	var ORDER_LIST_SAVE = "/order/saveOrders";
-	var CART_LIST_SAVE = "/cart/saveCarts";
+	var ORDER_LIST_SAVE = "/orders";
+	var CART_LIST_SAVE = "/carts";
 
 	getCarts();
 	$scope.removeCart = removeCart;
@@ -53,7 +53,6 @@ function cartController($scope, $rootScope, $uibModal, sharedService, $location)
 	function placeOrder() {
 		sharedService.postMethod(ORDER_LIST_SAVE, $scope.orderVo).then(
 				function(response) {
-					// $scope.orderInfo = response.data;
 					sharedService.store('orderInfo', response.data);
 					sharedService.store('isOrderPlaced', true);
 					$location.path("/orderSummary");

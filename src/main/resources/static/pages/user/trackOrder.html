@@ -9,16 +9,33 @@
 	</form>
 
 	<br> <br>
-	<div data-ng-show="isOrderTracked">
-		<h4>
-			Product Name: <b>{{orderTrack.purchaseOrderDetail.productName}}</b>
-		</h4>
-		<h4>
-			Your Booking Order Date: <b>{{orderTrack.orderBookingDate| date}}</b>
-		</h4>
-		<h4>
-			Your Booking Order Status: <b>{{orderTrack.orderStatus| date}}</b>
-		</h4>
+	<div align="center" data-ng-show="isOrderTracked">
+		<form>
+			<table width="600">
+				<tr>
+					<td>TransactionID:</td>
+					<td>{{orderTrack.orderNo}}</td>
+				</tr>
+				<tr>
+					<td>ShippingAddress:</td>
+					<td>{{orderTrack.address}}</td>
+				</tr>
+				<tr>
+					<td>Your Booking Order Date:</td>
+					<td>{{orderTrack.orderBookingDate| date}}</td>
+				</tr>
+				<tr>
+					<td>Order Status:</td>
+					<td>{{orderTrack.orderStatus}}</td>
+				</tr>
+			</table>
+		</form>
+		<br>
+		<div>
+			<p>
+				P: Placed <br>D: Delivered <br>C: Cancelled
+			</p>
+		</div>
 	</div>
 	<br> <br>
 	<div data-ng-show="errorMessage!=''">

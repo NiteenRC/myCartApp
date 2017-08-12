@@ -27,7 +27,7 @@ public class RatingController {
 	@Autowired
 	public RatingRepo ratingRepo;
 
-	@RequestMapping(value = WebUrl.RATING + "{productID}", method = RequestMethod.POST)
+	@RequestMapping(value = WebUrl.RATING_BY_PRODUCTID, method = RequestMethod.POST)
 	public ResponseEntity<Rating> addRating(@RequestBody Rating rating, @PathVariable int productID) {
 
 		Rating userResponse = ratingRepo.findByEmailIdAndProductProductID(rating.getEmailId(), productID);

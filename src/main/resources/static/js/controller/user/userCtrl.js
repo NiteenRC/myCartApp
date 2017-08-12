@@ -20,7 +20,7 @@ function userController($scope, $http, $location, $window, sharedService,
 		$scope.currentDateTime = new Date();
 	}, 100);
 
-	var checkUserLoginUrl = "user/userLogin/";
+	var checkUserLoginUrl = "user/byEmailAndPassword/";
 
 	function userLogin(user) {
 		$scope.dataLoading = true;
@@ -53,7 +53,7 @@ function userController($scope, $http, $location, $window, sharedService,
 		}
 
 		$scope.setError('');
-		sharedService.postMethod('user/registerNewUser', user).then(
+		sharedService.postMethod('user', user).then(
 				function(response) {
 					$scope.isRegistrationRequired = false;
 					$scope.error = false;
@@ -80,7 +80,8 @@ function userController($scope, $http, $location, $window, sharedService,
 				.getAllMethod('user/forgetPassword/' + userEmail)
 				.then(
 						function(response) {
-							$scope.userPasswordSentMessage = 'Password sent to your email, please check';
+							//$scope.userPasswordSentMessage = 'Password sent to your email, please check';
+							alert('Password sent to your email, please check');
 							// $scope.newUserPassword = true;
 						}, function(error) {
 							$scope.setError(error.data.errorMessage);
@@ -90,6 +91,7 @@ function userController($scope, $http, $location, $window, sharedService,
 	$scope.showForgetPassword = showForgetPassword;
 
 	function showForgetPassword() {
+		$location.path('forgetPassword');
 		$scope.isForgetPassword = true;
 	}
 

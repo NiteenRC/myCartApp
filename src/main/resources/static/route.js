@@ -5,6 +5,9 @@ angular.module('scotchApp').config(function($routeProvider) {
 	}).when('/user', {
 		templateUrl : 'pages/user/user.html',
 		controller : 'userController'
+	}).when('/forgetPassword', {
+		templateUrl : 'pages/user/forgetPassword.html',
+		controller : 'forgetPasswordController'
 	}).when('/category', {
 		templateUrl : 'pages/user/category.html',
 		controller : 'categoryController'
@@ -32,6 +35,9 @@ angular.module('scotchApp').config(function($routeProvider) {
 	}).when('/categoryManage', {
 		templateUrl : 'pages/admin/manage_category.html',
 		controller : 'categoryManageController'
+	}).when('/orderManage', {
+		templateUrl : 'pages/admin/manage_order.html',
+		controller : 'orderManageController'
 	}).otherwise({
 		redirectTo : '/home'
 	});

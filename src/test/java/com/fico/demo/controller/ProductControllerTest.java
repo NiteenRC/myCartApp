@@ -83,7 +83,7 @@ public class ProductControllerTest {
 	@Test
 	public void getProductsByCategoryIdTest() throws Exception {
 		long id = 1;
-		ResultActions result = mockMvc.perform(get(WebUrl.PRODUCT_BY_CATEGORY_ID + id)).andExpect(status().isOk());
+		ResultActions result = mockMvc.perform(get(WebUrl.PRODUCT_BY_CATEGORYID_SORTTYPE + id)).andExpect(status().isOk());
 		result.andDo(MockMvcResultHandlers.print());
 	}
 
@@ -91,7 +91,7 @@ public class ProductControllerTest {
 	public void getProductsByName() throws Exception {
 		initializeEmployeeData();
 		String name = "Item1";
-		ResultActions result = mockMvc.perform(get(WebUrl.PRODUCT_BY_NAME + name)).andExpect(status().isOk());
+		ResultActions result = mockMvc.perform(get(WebUrl.PRODUCT_BY_NAME_CATEGORYID_PRODUCTNAME_SORTTYPE + name)).andExpect(status().isOk());
 		result.andDo(MockMvcResultHandlers.print());
 	}
 

@@ -12,30 +12,40 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fico.demo.exception.CustomErrorType;
 import com.fico.demo.model.User;
 import com.fico.demo.repo.UserRepo;
+import com.fico.demo.util.WebUrl;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
 	private UserRepo userRepo;
 
-	@RequestMapping(value = "/forgetPassword/{emailId}", method = RequestMethod.GET)
+	@RequestMapping(value = WebUrl.USER_FORGET_PASSWORD_EMAILID, method = RequestMethod.POST)
 	public ResponseEntity<User> forgetPassword(@PathVariable String emailId) {
 		User userResponse = userRepo.findByUserEmail(emailId);
 		if (userResponse == null) {
 			return new ResponseEntity(new CustomErrorType("There is no credential for this Email id!!"),
 					HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(userResponse, HttpStatus.FOUND);
+		return new ResponseEntity<>(userResponse, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/registerNewUser", method = RequestMethod.POST)
+	@RequestMapping(value = WebUrl.USER_FORGET_PASSWORD, method = RequestMethod.POST)
+	public ResponseEntity<User> passwordReset(@RequestBody String password) {
+		User userResponse = userRepo.findByUserEmail(password);
+		if (userResponse == null) {
+			return new ResponseEntity(new CustomErrorType("There is no credential for this Email id!!"),
+					HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(userResponse, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = WebUrl.USER, method = RequestMethod.POST)
 	public ResponseEntity<User> registerNewUser(@RequestBody User user) {
 		if (user.getUserName() == null) {
 			return new ResponseEntity(new CustomErrorType("UserName is mandatory!!"), HttpStatus.NOT_FOUND);
 		}
-		
+
 		User userResponse = userRepo.findByUserEmail(user.getUserEmail());
 		if (userResponse != null) {
 			return new ResponseEntity(new CustomErrorType("User email already exist!!"), HttpStatus.FOUND);
@@ -44,7 +54,7 @@ public class UserController {
 		return new ResponseEntity<>(userResponse, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+	@RequestMapping(value = WebUrl.USER_BY_EMAILID_PASSWORD, method = RequestMethod.POST)
 	public ResponseEntity<User> checkUserCredentials(@RequestBody User user) {
 		User userResponse = userRepo.findByUserEmailAndUserPassword(user.getUserEmail(), user.getUserPassword());
 		if (userResponse == null) {

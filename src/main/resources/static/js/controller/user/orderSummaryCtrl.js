@@ -41,8 +41,6 @@ function orderSummaryController($scope, sharedService, $rootScope) {
 				function(response) {
 					$scope.orderTrack = response.data;
 					$scope.isOrderTracked = true;
-					// sharedService.store('orderInfo', '');
-					// sharedService.store('orderPlaced', true);
 				}, function(error) {
 					$scope.errorMessage = error.data.errorMessage;
 				});
@@ -51,10 +49,13 @@ function orderSummaryController($scope, sharedService, $rootScope) {
 	$scope.isOrderHistory = false;
 
 	function orderHistory() {
+		if (!sharedService.isDefinedOrNotNull($rootScope.userID)) {
+			return alert('Please login to check your order history!!');
+		}
+
 		sharedService.getAllMethod(ORDER_BY_USER + $rootScope.userID).then(
 				function(response) {
 					$scope.orderTrack = response.data;
-					$scope.isProductOrdered = false;
 					$scope.isOrderHistory = true;
 				}, function(error) {
 					$scope.errorMessage = error.data.errorMessage;

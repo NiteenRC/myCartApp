@@ -36,7 +36,7 @@ public class ProductController {
 	@Autowired
 	private CategoryRepo categoryRepo;
 
-	@RequestMapping(value = WebUrl.PRODUCT_SAVE_PRODUCT_LIST, method = RequestMethod.POST)
+	@RequestMapping(value = WebUrl.PRODUCTS, method = RequestMethod.POST)
 	public ResponseEntity<List<Product>> addproduct(@RequestBody List<Product> productList) {
 		if (productList == null) {
 			return new ResponseEntity(new CustomErrorType("input is empty"), HttpStatus.NO_CONTENT);
@@ -48,7 +48,7 @@ public class ProductController {
 		return new ResponseEntity<>(productResult, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT + "/{categoryID}", method = RequestMethod.POST)
+	@RequestMapping(value = WebUrl.PRODUCT_AND_CATEGORYID, method = RequestMethod.POST)
 	public ResponseEntity<Product> addproductList(@PathVariable int categoryID,
 			@RequestParam("productData") String productData, @RequestParam("file") MultipartFile file) {
 
@@ -88,7 +88,7 @@ public class ProductController {
 		return new ResponseEntity<>(product, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT + "/{productID}", method = RequestMethod.DELETE)
+	@RequestMapping(value = WebUrl.PRODUCT_BY_PRODUCTID, method = RequestMethod.DELETE)
 	public ResponseEntity<Product> deleteProduct(@PathVariable int productID) {
 		Product product = productRepo.findOne(productID);
 		if (product != null) {
@@ -107,8 +107,8 @@ public class ProductController {
 		return new ResponseEntity(new CustomErrorType("Unable to find list"), HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT + "/{productID}", method = RequestMethod.GET)
-	public ResponseEntity<Product> getProductsById(@PathVariable Integer productID) {
+	@RequestMapping(value = WebUrl.PRODUCT_BY_PRODUCTID, method = RequestMethod.GET)
+	public ResponseEntity<Product> getProductsById(@PathVariable int productID) {
 		Product product = productRepo.findOne(productID);
 		if (product == null) {
 			return new ResponseEntity(new CustomErrorType("ProductID: " + productID + " not found."),
@@ -117,8 +117,7 @@ public class ProductController {
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT_BY_NAME
-			+ "{categoryID}/{productName}/{sortType}", method = RequestMethod.GET)
+	@RequestMapping(value = WebUrl.PRODUCT_BY_NAME_CATEGORYID_PRODUCTNAME_SORTTYPE, method = RequestMethod.GET)
 	public ResponseEntity<List<Product>> getProductsByCategoryIDAndProductName(@PathVariable Integer categoryID,
 			@PathVariable String productName, @PathVariable String sortType) {
 		List<Product> product;
@@ -135,7 +134,7 @@ public class ProductController {
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT_BY_CATEGORY_ID + "{categoryID}/{sortType}", method = RequestMethod.GET)
+	@RequestMapping(value = WebUrl.PRODUCT_BY_CATEGORYID_SORTTYPE, method = RequestMethod.GET)
 	public ResponseEntity<List<Product>> getProductsByCategoryId(@PathVariable Integer categoryID,
 			@PathVariable String sortType) {
 		List<Product> productList;
@@ -153,7 +152,7 @@ public class ProductController {
 				HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT_FOR_ALL_CATEGORIES, method = RequestMethod.GET)
+	@RequestMapping(value = WebUrl.PRODUCTS, method = RequestMethod.GET)
 	public ResponseEntity<List<Category>> getProductsForAllCategories() {
 		List<Category> category = categoryRepo.findAll();
 		if (category == null) {

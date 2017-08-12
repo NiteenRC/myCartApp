@@ -26,7 +26,7 @@ public class CartController {
 	@Autowired
 	public CartRepo cartRepo;
 
-	@RequestMapping(value = WebUrl.CART_LIST_SAVE, method = RequestMethod.POST)
+	@RequestMapping(value = WebUrl.CARTS, method = RequestMethod.POST)
 	public ResponseEntity<List<Cart>> addCartList(@RequestBody List<Cart> cart) {
 		List<Cart> cartList = cartRepo.save(cart);
 		if (cartList != null && !cartList.isEmpty()) {
@@ -51,7 +51,7 @@ public class CartController {
 		return new ResponseEntity<>(cartResponse, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = WebUrl.CART + "{cartID}", method = RequestMethod.DELETE)
+	@RequestMapping(value = WebUrl.CART_BY_CARTID, method = RequestMethod.DELETE)
 	public ResponseEntity<Cart> deleteCart(@PathVariable int cartID) {
 		Cart cart = cartRepo.findOne(cartID);
 		if (cart == null) {

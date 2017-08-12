@@ -40,6 +40,7 @@
 <!-- User controllers -->
 <script src="js/controller/user/homeCtrl.js"></script>
 <script src="js/controller/user/userCtrl.js"></script>
+<script src="js/controller/user/forgetPasswordCtrl.js"></script>
 <script src="js/controller/user/productCtrl.js"></script>
 <script src="js/controller/user/categoryCtrl.js"></script>
 <script src="js/controller/user/cartCtrl.js"></script>
@@ -50,6 +51,7 @@
 <script src="js/controller/admin/productModal.js"></script>
 <script src="js/controller/admin/productManageCtrl.js"></script>
 <script src="js/controller/admin/categoryManageCtrl.js"></script>
+<script src="js/controller/admin/orderManageCtrl.js"></script>
 
 <!-- Shared services -->
 <script src="js/shared/sharedService.js"></script>
@@ -72,13 +74,13 @@
 						</div>
 					</div>
 					<br></br> <b><a href="#home">HOME</a> <a href="#category">SHOP
-							ONLINE</a>><a href="#checkout">PLACE ORDER</a> </b> <b> <!-- <a href="#home">HOME</a> <a href="#category">SHOP
-								ONLINE</a><a href="#checkout">PLACE ORDER</a> --> <a
+							ONLINE</a>><a href="#checkout">PLACE ORDER</a> </b> <b> <a
 						href="#orderSummary">ORDER SUMMARY</a> <a href="#trackOrder">TRACK
 							ORDER</a><a href="#cart"><img src="../style/shop_cart.jpg"
 							style="width: 30px; height: 15px;"></img></a> <span
-						data-ng-if="userType =='A'"><a href="#productManage">PRODUCT
-								MANAGE</a> <a href="#categoryManage">CATEGORY MANAGE</a></span>
+						data-ng-if="userType =='A'"> <a href="#categoryManage">CATEGORY
+								MANAGE</a><a href="#productManage">PRODUCT MANAGE</a><a
+							href="#orderManage">ORDER MANAGE</a></span>
 					</b> <a>{{currentDateTime | date:'dd MMM yyyy - hh:mm:ss a'}}</a>
 				</div>
 			</div>
@@ -95,8 +97,7 @@
 		</div>
 
 		<div id="footer">
-			<div style="float: right;"></div>
-			myCart &copy; 2017 | Copy rights reserved
+			<div align="center">myCart &copy; 2017 | Copy rights reserved</div>
 		</div>
 	</div>
 </body>

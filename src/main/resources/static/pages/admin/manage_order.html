@@ -1,0 +1,29 @@
+<div class="alert alert-info" data-ng-show="orders.length == 0">No
+	Orders found</div>
+
+<table class="table table-bordered table-striped"
+	data-ng-show="orders.length > 0" width="685">
+	<thead>
+		<tr>
+			<th style="text-align: center;">OrderId</th>
+			<th style="text-align: center;">Order Date</th>
+			<th style="text-align: center;">OrderStatus</th>
+			<th style="text-align: center;">Action</th>
+			<th style="text-align: center;">ChangetStatus</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr data-ng-repeat="order in orders">
+			<td style="text-align: center;">{{order.orderNo}}</td>
+			<td>{{order.orderBookingDate}}</td>
+			<td>{{order.orderStatus}}</td>
+			<td><select data-ng-model="order.orderStatus" value="--choose--">
+					<option value="P" selected="selected">Placed</option>
+					<option value="D">Delivered</option>
+					<option value="C">Cancelled</option>
+			</select></td>
+			<td><button data-ng-click="updateOrderStatus(order)"
+					data-ng-disabled="!order.orderStatus">ChangeStatus</button></td>
+		</tr>
+	</tbody>
+</table>

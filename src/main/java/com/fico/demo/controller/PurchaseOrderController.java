@@ -35,7 +35,7 @@ public class PurchaseOrderController {
 	@Autowired
 	public OrderDetailRepo orderDetailRepo;
 
-	@RequestMapping(value = WebUrl.ORDER_LIST_SAVE, method = RequestMethod.POST)
+	@RequestMapping(value = WebUrl.ORDERS, method = RequestMethod.POST)
 	public ResponseEntity<PurchaseOrder> addCartList(@RequestBody OrderVo orderVo) {
 		PurchaseOrder order = orderVo.getPurchaseOrder();
 
@@ -60,15 +60,15 @@ public class PurchaseOrderController {
 	}
 
 	@RequestMapping(value = WebUrl.ORDER, method = RequestMethod.POST)
-	public ResponseEntity<PurchaseOrder> addCart(@RequestBody PurchaseOrder cart) {
-		PurchaseOrder cartResponse = orderRepo.save(cart);
-		if (cart == null) {
+	public ResponseEntity<PurchaseOrder> createOrder(@RequestBody PurchaseOrder purchaseOrder) {
+		PurchaseOrder cartResponse = orderRepo.save(purchaseOrder);
+		if (purchaseOrder == null) {
 			return new ResponseEntity(new CustomErrorType("Order is not done!!"), HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(cartResponse, HttpStatus.CREATED);
 	}
-
-	@RequestMapping(value = WebUrl.ORDER + "{orderNo}", method = RequestMethod.GET)
+	
+	@RequestMapping(value = WebUrl.ORDER_BY_ORDERNO, method = RequestMethod.GET)
 	public ResponseEntity<PurchaseOrder> findByOrder(@PathVariable String orderNo) {
 		PurchaseOrder po = orderRepo.findOneByOrderNo(orderNo);
 		if (po != null && po.getOrderNo() != null) {
@@ -76,8 +76,17 @@ public class PurchaseOrderController {
 		}
 		return new ResponseEntity(new CustomErrorType("Order is not done!!"), HttpStatus.NOT_FOUND);
 	}
+	
+	@RequestMapping(value = WebUrl.ORDER, method = RequestMethod.GET)
+	public ResponseEntity<List<PurchaseOrder>> findAllOrder() {
+		List<PurchaseOrder> po = orderRepo.findAll();
+		if (po != null && !po.isEmpty()) {
+			return new ResponseEntity<>(po, HttpStatus.OK);
+		}
+		return new ResponseEntity(new CustomErrorType("Order is not done!!"), HttpStatus.NOT_FOUND);
+	}
 
-	@RequestMapping(value = WebUrl.ORDER_BY_USER + "{userID}", method = RequestMethod.GET)
+	@RequestMapping(value = WebUrl.ORDER_BY_USERID, method = RequestMethod.GET)
 	public ResponseEntity<List<PurchaseOrder>> findAllOrdersByUser(@PathVariable String userID) {
 		List<PurchaseOrder> productList = orderRepo.findAllOrdersByUserID(Integer.parseInt(userID));
 		if (productList.isEmpty()) {

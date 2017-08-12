@@ -29,11 +29,7 @@
 		</div>
 	</div>
 
-	<div data-ng-show="!isOrderHistory">
-		<h4>Currently, You have not done any order yet</h4>
-	</div>
-
-	<div data-ng-show="isOrderHistory">
+	<div data-ng-show="orderTrack.length==0">
 		<h4>You don't have order history</h4>
 	</div>
 
