@@ -1,5 +1,5 @@
-angular.module('scotchApp.forgetPassword_module',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
+angular.module('myCart.forgetPassword_module',
+		[ 'myCart.shared_module.sharedService' ]).controller(
 		'forgetPasswordController', forgetPasswordController);
 
 function forgetPasswordController($scope, $http, $location, sharedService) {

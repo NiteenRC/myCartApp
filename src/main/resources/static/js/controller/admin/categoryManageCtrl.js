@@ -1,5 +1,5 @@
-angular.module('scotchApp.categoryManage_module',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
+angular.module('myCart.categoryManage_module',
+		[ 'myCart.shared_module.sharedService' ]).controller(
 		'categoryManageController', categoryManageController);
 
 function categoryManageController($scope, $uibModal, sharedService) {
@@ -10,12 +10,6 @@ function categoryManageController($scope, $uibModal, sharedService) {
 	getCategory();
 	$scope.saveCategory = saveCategory;
 	$scope.removeCategory = removeCategory;
-
-	$scope.successMessage = '';
-	$scope.errorMessage = '';
-
-	$scope.reset = reset;
-	$scope.isGridEmpty = isGridEmpty;
 
 	$scope.categoryData = {
 		productID : null,
@@ -70,9 +64,5 @@ function categoryManageController($scope, $uibModal, sharedService) {
 	function reset() {
 		$scope.successMessage = '';
 		$scope.errorMessage = '';
-	}
-
-	function isGridEmpty(data) {
-		return !sharedService.isDefinedOrNotNull(data)
 	}
 }

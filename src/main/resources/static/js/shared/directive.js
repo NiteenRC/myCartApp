@@ -1,5 +1,5 @@
-angular.module('scotchApp.directive_module.directiveService',
-		[ 'scotchApp.shared_module.sharedService' ]).directive('fileModel',
+angular.module('myCart.directive_module.directiveService',
+		[ 'myCart.shared_module.sharedService' ]).directive('fileModel',
 		fileModel);
 
 function fileModel(sharedService, $parse) {

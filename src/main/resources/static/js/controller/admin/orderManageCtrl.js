@@ -1,5 +1,5 @@
-angular.module('scotchApp.orderManage_module',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
+angular.module('myCart.orderManage_module',
+		[ 'myCart.shared_module.sharedService' ]).controller(
 		'orderManageController', orderManageController);
 
 function orderManageController($scope, sharedService) {
@@ -10,7 +10,6 @@ function orderManageController($scope, sharedService) {
 	$scope.findByOrderNoAndOrderDate = findByOrderNoAndOrderDate;
 	$scope.updateOrderStatus = updateOrderStatus;
 	getOrders();
-	$scope.isGridEmpty = isGridEmpty;
 
 	function updateOrderStatus(order) {
 		sharedService.postMethod(orderUrl, order).then(function(response) {
@@ -84,8 +83,4 @@ function orderManageController($scope, sharedService) {
 
 	$scope.formats = [ 'dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate' ];
 	$scope.format = $scope.formats[2];
-
-	function isGridEmpty(data) {
-		return !sharedService.isDefinedOrNotNull(data)
-	}
 }

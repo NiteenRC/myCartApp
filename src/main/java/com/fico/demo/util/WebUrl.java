@@ -19,6 +19,7 @@ public interface WebUrl {
 	String PRODUCT_BY_PRODUCTID = "/product/{productID}";
 
 	String CART = "/cart/";
+	String CART_BY_USERID = "/cart/{userID}";
 	String CART_BY_CARTID = "/cart/{cartID}";
 	String CARTS = "/carts";
 

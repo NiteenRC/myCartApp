@@ -1,13 +1,11 @@
-angular.module('scotchApp.user_module',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
-		'userController', userController);
+angular.module('myCart.user_module', [ 'myCart.shared_module.sharedService' ])
+		.controller('userController', userController);
 
 function userController($scope, $http, $location, $window, sharedService,
 		$rootScope, $interval) {
 	'use strict'
 
 	$rootScope.userLoggedin = false;
-	$rootScope.userID = '';
 	$rootScope.userName = '';
 	$rootScope.userType = '';
 	$rootScope.userDetails = null;
@@ -53,13 +51,12 @@ function userController($scope, $http, $location, $window, sharedService,
 		}
 
 		$scope.setError('');
-		sharedService.postMethod('user', user).then(
-				function(response) {
-					$scope.isRegistrationRequired = false;
-					$scope.error = false;
-				}, function(error) {
-					$scope.setError(error.data.errorMessage);
-				});
+		sharedService.postMethod('user', user).then(function(response) {
+			$scope.isRegistrationRequired = false;
+			$scope.error = false;
+		}, function(error) {
+			$scope.setError(error.data.errorMessage);
+		});
 	}
 
 	$scope.isPasswordMatched = false;
@@ -76,16 +73,12 @@ function userController($scope, $http, $location, $window, sharedService,
 
 	function forgetPassword(userEmail) {
 		$scope.isForgetPassword = true;
-		sharedService
-				.getAllMethod('user/forgetPassword/' + userEmail)
-				.then(
-						function(response) {
-							//$scope.userPasswordSentMessage = 'Password sent to your email, please check';
-							alert('Password sent to your email, please check');
-							// $scope.newUserPassword = true;
-						}, function(error) {
-							$scope.setError(error.data.errorMessage);
-						});
+		sharedService.getAllMethod('user/forgetPassword/' + userEmail).then(
+				function(response) {
+					alert('Password sent to your email, please check');
+				}, function(error) {
+					$scope.setError(error.data.errorMessage);
+				});
 	}
 
 	$scope.showForgetPassword = showForgetPassword;

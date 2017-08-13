@@ -30,16 +30,16 @@ public class Cart implements Serializable {
 	private byte[] image;
 	// @OneToOne // (cascade = CascadeType.ALL)
 	private int productID;
-	@OneToOne // One cart can have multiple users
-	@JoinColumn
-	private User user;
+	// @OneToOne // One cart can have multiple users
+	// @JoinColumn
+	private int userID;
 
-	public User getUser() {
-		return user;
+	public int getUserID() {
+		return userID;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 	public Cart() {

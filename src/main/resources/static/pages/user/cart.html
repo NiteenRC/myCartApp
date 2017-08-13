@@ -25,7 +25,7 @@
 				</div></td>
 			<td>{{cart.price*cart.qty}}</td>
 		</tr>
-		<tr data-ng-show="!isGridEmpty(carts)">
+		<tr data-ng-show="carts.length!=0">
 			<td>Total:</td>
 			<td></td>
 			<td></td>
@@ -34,7 +34,7 @@
 			<td>{{getTotal('price')*getTotal('qty')}}</td>
 		</tr>
 	</table>
-	<p align="center" data-ng-show="isGridEmpty(carts)">Your cart is
+	<p align="center" data-ng-show="carts.length==0">Your cart is
 		currently empty</p>
 </div>
 

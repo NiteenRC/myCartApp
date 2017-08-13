@@ -1,5 +1,5 @@
-angular.module('scotchApp.product_module',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
+angular.module('myCart.product_module',
+		[ 'myCart.shared_module.sharedService' ]).controller(
 		'productController', productController);
 
 function productController($scope, $uibModal, sharedService,$location) {
@@ -21,12 +21,7 @@ function productController($scope, $uibModal, sharedService,$location) {
 	$scope.calculateRating = calculateRating;
 	
 	$scope.sortDirection="MR";
-
-	$scope.successMessage = '';
-	$scope.errorMessage = '';
 	$scope.calculate = calculate;
-	$scope.reset = reset;
-	$scope.isGridEmpty = isGridEmpty;
 
 	$scope.productSort = [ {
 		sortType : "MP",
@@ -127,9 +122,5 @@ function productController($scope, $uibModal, sharedService,$location) {
 	function reset() {
 		$scope.successMessage = '';
 		$scope.errorMessage = '';
-	}
-
-	function isGridEmpty(data) {
-		return !sharedService.isDefinedOrNotNull(data)
 	}
 }

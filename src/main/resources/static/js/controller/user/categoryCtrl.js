@@ -1,5 +1,5 @@
-angular.module('scotchApp.category_module',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
+angular.module('myCart.category_module',
+		[ 'myCart.shared_module.sharedService' ]).controller(
 		'categoryController', categoryController);
 
 function categoryController($scope, $uibModal, sharedService, $location) {
@@ -10,17 +10,9 @@ function categoryController($scope, $uibModal, sharedService, $location) {
 	var CATEGORY_BY_NAME = "/category/byName/";
 	var PRODUCT_FOR_ALL_CATEGORIES = "/products/";
 
-	var vm = this;
-
 	getCategory();
 	$scope.productsByCategory = getProducts;
 	$scope.searchByCategoryName = searchByCategoryName;
-
-	$scope.successMessage = '';
-	$scope.errorMessage = '';
-
-	$scope.reset = reset;
-	$scope.isGridEmpty = isGridEmpty;
 
 	function getCategory() {
 		$scope.dataLoading = true;
@@ -64,9 +56,5 @@ function categoryController($scope, $uibModal, sharedService, $location) {
 	function reset() {
 		$scope.successMessage = '';
 		$scope.errorMessage = '';
-	}
-
-	function isGridEmpty(data) {
-		return !sharedService.isDefinedOrNotNull(data)
 	}
 }

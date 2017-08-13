@@ -1,5 +1,5 @@
-angular.module('scotchApp.product_module.productModal',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
+angular.module('myCart.product_module.productModal',
+		[ 'myCart.shared_module.sharedService' ]).controller(
 		'productModalCtrl', modalCtrl);
 
 function modalCtrl($scope, $http, $modalInstance, sharedService) {

@@ -1,5 +1,5 @@
-angular.module('scotchApp.orderSummary_module',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
+angular.module('myCart.orderSummary_module',
+		[ 'myCart.shared_module.sharedService' ]).controller(
 		'orderSummaryController', orderSummaryController);
 
 function orderSummaryController($scope, sharedService, $rootScope) {
@@ -52,9 +52,8 @@ function orderSummaryController($scope, sharedService, $rootScope) {
 		if (!sharedService.isDefinedOrNotNull($rootScope.userID)) {
 			return alert('Please login to check your order history!!');
 		}
-
-		sharedService.getAllMethod(ORDER_BY_USER + $rootScope.userID).then(
-				function(response) {
+		sharedService.getAllMethod(ORDER_BY_USER + parseInt($rootScope.userID))
+				.then(function(response) {
 					$scope.orderTrack = response.data;
 					$scope.isOrderHistory = true;
 					$scope.isProductOrdered = false;

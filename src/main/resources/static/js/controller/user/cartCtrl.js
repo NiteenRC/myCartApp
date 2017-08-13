@@ -1,26 +1,19 @@
-angular.module('scotchApp.cart_module',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
-		'cartController', cartController);
+angular.module('myCart.cart_module', [ 'myCart.shared_module.sharedService' ])
+		.controller('cartController', cartController);
 
 function cartController($scope, $rootScope, $uibModal, sharedService, $location) {
 	'use strict';
 
 	var cartUrl = "/cart/";
-	var ORDER_LIST_SAVE = "/orders";
 	var CART_LIST_SAVE = "/carts";
 
-	$scope.carts = [];
-
+	//$scope.carts = [];
 	getCarts();
 	$scope.removeCart = removeCart;
 	$scope.addToCart = addToCart
 	$scope.addCartList = addCartList;
-
-	$scope.successMessage = '';
-	$scope.errorMessage = '';
-
-	$scope.reset = reset;
-	$scope.isGridEmpty = isGridEmpty;
+	$scope.order = {};
+	$scope.addToCart = addToCart;
 
 	$scope.cartData = {
 		productName : null,
@@ -29,40 +22,11 @@ function cartController($scope, $rootScope, $uibModal, sharedService, $location)
 		qty : null
 	};
 
-	$scope.order = {};
-
-	$scope.purchaseOrderDetail = [ {
-		"quanity" : 2,
-		"productName" : "opp a37",
-		"price" : 110000,
-		"amount" : 1
-	}, {
-		"quanity" : 4,
-		"productName" : "SSSS",
-		"price" : 120000,
-		"amount" : 11
-	} ];
-
 	$scope.orderVo = {
 		userID : parseInt($rootScope.userID),
 		purchaseOrder : $scope.order,
 		purchaseOrderDetail : $scope.carts
 	};
-
-	$scope.addToCart = addToCart;
-	$scope.placeOrder = placeOrder;
-
-	function placeOrder() {
-		sharedService.postMethod(ORDER_LIST_SAVE, $scope.orderVo).then(
-				function(response) {
-					sharedService.store('orderInfo', response.data);
-					sharedService.store('isOrderPlaced', true);
-					$location.path("/orderSummary");
-				}, function(error) {
-					$scope.errorMessage = 'Error while creating' + error;
-					$scope.successMessage = '';
-				});
-	}
 
 	function addToCart(cart) {
 		sharedService.postMethod(cartUrl, cart).then(function(response) {
@@ -86,7 +50,7 @@ function cartController($scope, $rootScope, $uibModal, sharedService, $location)
 	}
 
 	function getCarts() {
-		sharedService.getMethod(cartUrl).then(
+		sharedService.getAllMethod(cartUrl + parseInt($rootScope.userID)).then(
 				function(response) {
 					$scope.carts = response.data;
 					$scope.orderVo.purchaseOrderDetail = response.data;
@@ -114,13 +78,4 @@ function cartController($scope, $rootScope, $uibModal, sharedService, $location)
 		});
 		return total;
 	};
-
-	function reset() {
-		$scope.successMessage = '';
-		$scope.errorMessage = '';
-	}
-
-	function isGridEmpty(data) {
-		return !sharedService.isDefinedOrNotNull(data)
-	}
 }

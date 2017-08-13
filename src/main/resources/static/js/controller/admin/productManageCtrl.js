@@ -1,5 +1,5 @@
-angular.module('scotchApp.productManage_module',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
+angular.module('myCart.productManage_module',
+		[ 'myCart.shared_module.sharedService' ]).controller(
 		'productManageController', productManageController);
 
 function productManageController($scope, $uibModal, sharedService) {
@@ -18,7 +18,6 @@ function productManageController($scope, $uibModal, sharedService) {
 
 	$scope.openProductModal = openModal;
 	$scope.reset = reset;
-	$scope.isGridEmpty = isGridEmpty;
 
 	function openModal() {
 		var modalInstance = $uibModal.open({
@@ -99,9 +98,5 @@ function productManageController($scope, $uibModal, sharedService) {
 	function reset() {
 		$scope.successMessage = '';
 		$scope.errorMessage = '';
-	}
-
-	function isGridEmpty(data) {
-		return !sharedService.isDefinedOrNotNull(data)
 	}
 }

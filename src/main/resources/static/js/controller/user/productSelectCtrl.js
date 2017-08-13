@@ -1,8 +1,8 @@
-angular.module('scotchApp.product_select_module',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
+angular.module('myCart.product_select_module',
+		[ 'myCart.shared_module.sharedService' ]).controller(
 		'productSelectController', productSelectController);
 
-function productSelectController($scope, sharedService) {
+function productSelectController($scope,$rootScope, sharedService) {
 	'use strict';
 
 	var cartUrl = "/cart/";
@@ -56,13 +56,8 @@ function productSelectController($scope, sharedService) {
 		}
 	}
 
-	/*$scope.productItem ={
-		productName:null,
-		user:"dd"	
-	};*/
-	
-	//need to implement with user id
 	function addToCart(cart) {
+		$scope.productItem.userID = parseInt($rootScope.userID);
 		sharedService.postMethod(cartUrl, $scope.productItem).then(function(response) {
 			$scope.carts = response.data;
 			alert(cart.productName + '  added to cart successfully!!');

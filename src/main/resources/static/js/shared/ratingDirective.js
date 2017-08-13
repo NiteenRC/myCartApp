@@ -1,5 +1,5 @@
-angular.module('scotchApp.directive_module.ratingDirectiveService',
-		[ 'scotchApp.shared_module.sharedService' ]).directive('starRating',
+angular.module('myCart.directive_module.ratingDirectiveService',
+		[ 'myCart.shared_module.sharedService' ]).directive('starRating',
 		starRating);
 
 function starRating() {

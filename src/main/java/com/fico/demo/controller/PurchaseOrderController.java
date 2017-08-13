@@ -37,20 +37,18 @@ public class PurchaseOrderController {
 	@RequestMapping(value = WebUrl.ORDERS, method = RequestMethod.POST)
 	public ResponseEntity<PurchaseOrder> addCartList(@RequestBody OrderVo orderVo) {
 		PurchaseOrder order = orderVo.getPurchaseOrder();
-
 		order.setOrderBookingDate(new Date());
 		order.setOrderNo("ORDERNO" + Utility.nextSessionId());
 		order.setUserID(orderVo.getUserID());
 		PurchaseOrder oder = orderRepo.save(order);
 
 		List<PurchaseOrderDetail> orderDetail = orderVo.getPurchaseOrderDetail();
-
 		PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
-		purchaseOrderDetail.setOrder(oder);
 
-		orderDetail.add(purchaseOrderDetail);
-
-		orderDetailRepo.save(orderDetail);
+		for (PurchaseOrderDetail purchaseOrderDetails : orderDetail) {
+			purchaseOrderDetail.setOrder(oder);
+			orderDetailRepo.save(purchaseOrderDetails);
+		}
 
 		if (oder == null) {
 			return new ResponseEntity(new CustomErrorType("Order is not done!!"), HttpStatus.NOT_FOUND);
@@ -84,7 +82,7 @@ public class PurchaseOrderController {
 	}
 
 	@RequestMapping(value = WebUrl.ORDER_BY_USERID, method = RequestMethod.GET)
-	public ResponseEntity<List<PurchaseOrder>> findAllOrdersByUser(@PathVariable String userID) {
-		return new ResponseEntity<>(orderRepo.findAllOrdersByUserID(Integer.parseInt(userID)), HttpStatus.OK);
+	public ResponseEntity<List<PurchaseOrder>> findAllOrdersByUser(@PathVariable int userID) {
+		return new ResponseEntity<>(orderRepo.findAllOrdersByUserID(userID), HttpStatus.OK);
 	}
 }

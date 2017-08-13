@@ -1,5 +1,5 @@
-angular.module('scotchApp.home_module',
-		[ 'scotchApp.shared_module.sharedService' ]).controller(
+angular.module('myCart.home_module',
+		[ 'myCart.shared_module.sharedService' ]).controller(
 		'homeController', homeController);
 
 function homeController($scope, $route) {

@@ -1,4 +1,4 @@
-angular.module('scotchApp').config(function($routeProvider) {
+angular.module('myCart').config(function($routeProvider) {
 	$routeProvider.when('/home', {
 		templateUrl : 'pages/user/home.html',
 		controller : 'homeController'
@@ -28,7 +28,7 @@ angular.module('scotchApp').config(function($routeProvider) {
 		controller : 'orderSummaryController'
 	}).when('/checkout', {
 		templateUrl : 'pages/user/checkout.html',
-		controller : 'cartController'
+		controller : 'checkoutController'
 	}).when('/productManage', {
 		templateUrl : 'pages/admin/manage_product.html',
 		controller : 'productManageController'

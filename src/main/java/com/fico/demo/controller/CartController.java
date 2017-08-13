@@ -57,8 +57,8 @@ public class CartController {
 		return new ResponseEntity<>(cart, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.CART, method = RequestMethod.GET)
-	public ResponseEntity<List<Cart>> fetchCartList() {
-		return new ResponseEntity<>(cartRepo.findAll(), HttpStatus.OK);
+	@RequestMapping(value = WebUrl.CART_BY_USERID, method = RequestMethod.GET)
+	public ResponseEntity<List<Cart>> fetchCartList(@PathVariable int userID) {
+		return new ResponseEntity<>(cartRepo.findAllCartsByUserID(userID), HttpStatus.OK);
 	}
 }
