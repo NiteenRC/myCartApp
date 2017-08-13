@@ -11,14 +11,15 @@ function userController($scope, $http, $location, $window, sharedService,
 	$rootScope.userDetails = null;
 	$scope.isRegistrationRequired = false;
 
+	var cartUrl = "/cart/";
+	var checkUserLoginUrl = "user/byEmailAndPassword/";
+
 	$scope.registerNewUser = registerNewUser;
 	$scope.userLogin = userLogin;
 
 	$interval(function() {
 		$scope.currentDateTime = new Date();
 	}, 100);
-
-	var checkUserLoginUrl = "user/byEmailAndPassword/";
 
 	function userLogin(user) {
 		$scope.dataLoading = true;
@@ -38,6 +39,7 @@ function userController($scope, $http, $location, $window, sharedService,
 								userDetails.data.userType)
 						$scope.getUserNamerfromCookie();
 						$scope.submitted = true;
+						getCarts();
 					}
 				}, function(error) {
 					$scope.setError(error.data.errorMessage);
@@ -65,6 +67,18 @@ function userController($scope, $http, $location, $window, sharedService,
 	function checkPassword(confirmPassword) {
 		$scope.isPasswordMatched = $scope.user.userPassword == confirmPassword ? true
 				: false
+	}
+
+	function getCarts() {
+		if ($rootScope.userID != null) {
+			sharedService.getAllMethod(cartUrl + parseInt($rootScope.userID))
+					.then(function(response) {
+						$rootScope.totalCartsByUser = response.data;
+					}, function(error) {
+						$scope.errorMessage = 'Error while creating' + error;
+						$scope.successMessage = '';
+					});
+		}
 	}
 
 	$scope.forgetPassword = forgetPassword;

@@ -7,7 +7,6 @@ function cartController($scope, $rootScope, $uibModal, sharedService, $location)
 	var cartUrl = "/cart/";
 	var CART_LIST_SAVE = "/carts";
 
-	//$scope.carts = [];
 	getCarts();
 	$scope.removeCart = removeCart;
 	$scope.addToCart = addToCart
@@ -31,6 +30,7 @@ function cartController($scope, $rootScope, $uibModal, sharedService, $location)
 	function addToCart(cart) {
 		sharedService.postMethod(cartUrl, cart).then(function(response) {
 			$scope.carts = response.data;
+			$rootScope.totalCartsByUser = response.data;
 			alert(cart.productName + '  added to cart successfully!!');
 		}, function(error) {
 			$scope.errorMessage = 'Error while creating' + error;

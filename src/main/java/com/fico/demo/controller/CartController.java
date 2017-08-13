@@ -33,7 +33,7 @@ public class CartController {
 
 	@RequestMapping(value = WebUrl.CART, method = RequestMethod.POST)
 	public ResponseEntity<Cart> addCart(@RequestBody Cart cart) {
-		Cart cart2 = cartRepo.findByProductName(cart.getProductName());
+		Cart cart2 = cartRepo.findByProductNameAndUserID(cart.getProductName(), cart.getUserID());
 		Cart cartResponse;
 
 		if (cart2 != null) {

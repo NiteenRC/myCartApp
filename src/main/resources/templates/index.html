@@ -71,10 +71,11 @@
 							ONLINE</a>><a href="#checkout">PLACE ORDER</a> </b> <b> <a
 						href="#orderSummary">ORDER SUMMARY</a> <a href="#trackOrder">TRACK
 							ORDER</a><a href="#cart"><img src="../style/shop_cart.jpg"
-							style="width: 30px; height: 15px;"></img></a> <span
-						data-ng-if="userType =='A'"> <a href="#categoryManage">CATEGORY
-								MANAGE</a><a href="#productManage">PRODUCT MANAGE</a><a
-							href="#orderManage">ORDER MANAGE</a></span>
+							style="width: 30px; height: 15px;"></img><b>({{totalCartsByUser.length}})</b></a>
+						<span data-ng-if="userType =='A'"> <a
+							href="#categoryManage">CATEGORY MANAGE</a><a
+							href="#productManage">PRODUCT MANAGE</a><a href="#orderManage">ORDER
+								MANAGE</a></span>
 					</b>
 					<!-- <a>{{currentDateTime | date:'dd MMM yyyy - hh:mm:ss a'}}</a> -->
 				</div>

@@ -5,7 +5,6 @@ angular.module('myCart.product_module',
 function productController($scope, $uibModal, sharedService,$location) {
 	'use strict';
 
-	var cartUrl = "/cart/";
 	var productUrl = "/product/";
 	var productByNameUrl = "/product/byName/";
 	var PRODUCT_BY_CATEGORY_ID = "/product/category/"
@@ -14,14 +13,11 @@ function productController($scope, $uibModal, sharedService,$location) {
 	$scope.getCategoryID=sharedService.get('categoryID');
 
 	$scope.searchByProductName = searchByProductName;
-	$scope.calculate = calculate;
-	$scope.addToCart = addToCart
 	$scope.selectProduct = selectProduct;
 	$scope.getProductsBySorting = getProductsBySorting;
 	$scope.calculateRating = calculateRating;
 	
 	$scope.sortDirection="MR";
-	$scope.calculate = calculate;
 
 	$scope.productSort = [ {
 		sortType : "MP",
@@ -36,16 +32,6 @@ function productController($scope, $uibModal, sharedService,$location) {
 		sortType : "LH",
 		sortDirection : "Price:Low to High"
 	} ];
-
-	function addToCart(cart) {
-		sharedService.postMethod(cartUrl, cart).then(function(response) {
-			$scope.carts = response.data;
-			alert(cart.productName + '  added to cart successfully!!');
-		}, function(error) {
-			$scope.errorMessage = 'Error while creating' + error;
-			$scope.successMessage = '';
-		});
-	}
 
 	function searchByProductName() {
 		 if (!sharedService.isDefinedOrNotNull($scope.productName)) { 
@@ -94,16 +80,6 @@ function productController($scope, $uibModal, sharedService,$location) {
 		 fetchProductsByCategoryIDAndProductName();
 	}
 
-	function calculate() {
-		var newVal = 0;
-		angular.forEach($scope.products, function(oldVal) {
-			if (sharedService.isDefinedOrNotNull(oldVal.qty)) {
-				newVal = newVal + parseInt(oldVal.qty);
-			}
-		});
-		$scope.totalQty = newVal
-	}
-
 	function calculateRating(rating) {
 		var newVal = 0;
 		angular.forEach(rating, function(oldVal) {
@@ -117,10 +93,5 @@ function productController($scope, $uibModal, sharedService,$location) {
 		else{
 		return Math.round(((newVal / rating.length)*100)/100)
 		}
-	}
-
-	function reset() {
-		$scope.successMessage = '';
-		$scope.errorMessage = '';
 	}
 }

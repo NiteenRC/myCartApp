@@ -25,13 +25,9 @@
 					<div class="row">
 						<div class="col-md-12">
 							<a href="javascript:void(0);" class="btn-danger"
-								data-ng-click="addToCart(productItem)">Add to cart</a> <a
-								href="javascript:void(0);" class="btn-info">More info</a>
+								data-ng-click="addToCart(productItem)">Add to cart</a>
 						</div>
 						<br>
-						<div class="col-md-12">
-							<a href="#cart" class="btn-info">View cart</a>
-						</div>
 						<div class="col-md-12" ng-show="productItem.ratings.length>0">
 							Users Rating: {{calculateRating(productItem.ratings)}}
 							<div read-only star-rating
