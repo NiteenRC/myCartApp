@@ -24,6 +24,7 @@ public interface WebUrl {
 
 	String ORDER = "/order/";
 	String ORDER_BY_ORDERNO = "/order/{orderNo}";
+	String ORDER_BY_ORDERDATES = "/order/{fromDate}/{toDate}";
 	String ORDER_BY_USERID = "/order/byUser/{userID}";
 	String ORDERS = "/orders";
 

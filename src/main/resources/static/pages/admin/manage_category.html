@@ -21,8 +21,9 @@
 	</form>
 </div>
 <br>
+
 <div>
-	<table class="table table-hover">
+	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<th>Category Image</th>
@@ -37,8 +38,7 @@
 			<td><button data-ng-click="removeCategory(cat.categoryID)">X</button>
 		</tr>
 	</table>
-	<p align="center" data-ng-show="isGridEmpty(categories)">--No
-		Data--</p>
+	<p align="center" data-ng-show="categories.length==0">--No Data--</p>
 </div>
 
 <button onclick="window.location.href='#home'">Back to Home</button>

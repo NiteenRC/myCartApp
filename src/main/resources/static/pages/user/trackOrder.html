@@ -9,7 +9,7 @@
 	</form>
 
 	<br> <br>
-	<div align="center" data-ng-show="isOrderTracked">
+	<div align="center" data-ng-show="isOrderTracked && orderTrack!=''">
 		<form>
 			<table width="600">
 				<tr>
@@ -33,12 +33,12 @@
 		<br>
 		<div>
 			<p>
-				P: Placed <br>D: Delivered <br>C: Cancelled
+				O: Ordered <br>D: Delivered <br>C: Cancelled
 			</p>
 		</div>
 	</div>
 	<br> <br>
-	<div data-ng-show="errorMessage!=''">
+	<div data-ng-show="orderTrack==''">
 		<h4>You have not done any order</h4>
 		<h4>
 			Please verify your order: <b>{{orderNo}}</b>

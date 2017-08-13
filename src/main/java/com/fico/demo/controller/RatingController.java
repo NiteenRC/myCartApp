@@ -32,7 +32,8 @@ public class RatingController {
 
 		Rating userResponse = ratingRepo.findByEmailIdAndProductProductID(rating.getEmailId(), productID);
 		if (userResponse != null) {
-			return new ResponseEntity(new CustomErrorType("You are already rated for this product!!"), HttpStatus.FOUND);
+			return new ResponseEntity(new CustomErrorType("You are already rated for this product!!"),
+					HttpStatus.FOUND);
 		}
 
 		Product product = new Product();
@@ -48,10 +49,6 @@ public class RatingController {
 
 	@RequestMapping(value = WebUrl.RATING, method = RequestMethod.GET)
 	public ResponseEntity<List<Rating>> cartList() {
-		List<Rating> ratingList = ratingRepo.findAll();
-		if (ratingList == null) {
-			return new ResponseEntity(new CustomErrorType("Unable to find list"), HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<>(ratingList, HttpStatus.OK);
+		return new ResponseEntity<>(ratingRepo.findAll(), HttpStatus.OK);
 	}
 }

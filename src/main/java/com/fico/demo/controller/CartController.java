@@ -28,11 +28,7 @@ public class CartController {
 
 	@RequestMapping(value = WebUrl.CARTS, method = RequestMethod.POST)
 	public ResponseEntity<List<Cart>> addCartList(@RequestBody List<Cart> cart) {
-		List<Cart> cartList = cartRepo.save(cart);
-		if (cartList != null && !cartList.isEmpty()) {
-			return new ResponseEntity<>(cartList, HttpStatus.CREATED);
-		}
-		return new ResponseEntity(new CustomErrorType("Cart List is not saved"), HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(cartRepo.save(cart), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = WebUrl.CART, method = RequestMethod.POST)
@@ -63,10 +59,6 @@ public class CartController {
 
 	@RequestMapping(value = WebUrl.CART, method = RequestMethod.GET)
 	public ResponseEntity<List<Cart>> fetchCartList() {
-		List<Cart> cartList = cartRepo.findAll();
-		if (cartList != null && !cartList.isEmpty()) {
-			return new ResponseEntity<>(cartList, HttpStatus.OK);
-		}
-		return new ResponseEntity(new CustomErrorType("Unable to find list"), HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(cartRepo.findAll(), HttpStatus.OK);
 	}
 }

@@ -15,6 +15,6 @@ angular.module('scotchApp', [ 'ngRoute',
 		'scotchApp.directive_module.directiveService',
 		'scotchApp.directive_module.ratingDirectiveService',
 		'scotchApp.orderSummary_module',
-		'scotchApp.orderManage_module'
+		'scotchApp.orderManage_module',
 ]);
 

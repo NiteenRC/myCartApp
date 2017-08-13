@@ -57,6 +57,7 @@ function orderSummaryController($scope, sharedService, $rootScope) {
 				function(response) {
 					$scope.orderTrack = response.data;
 					$scope.isOrderHistory = true;
+					$scope.isProductOrdered = false;
 				}, function(error) {
 					$scope.errorMessage = error.data.errorMessage;
 				});

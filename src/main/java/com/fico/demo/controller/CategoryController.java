@@ -43,7 +43,7 @@ public class CategoryController {
 			cat.setImage(bytes);
 		} catch (IOException e) {
 			logger.error("File is failed to save", e);
-			return new ResponseEntity("File is failed to save" , HttpStatus.BAD_REQUEST);
+			return new ResponseEntity("File is failed to save", HttpStatus.BAD_REQUEST);
 		}
 
 		JsonNode jn = Utility.jsonToObject(categoryData);
@@ -82,11 +82,7 @@ public class CategoryController {
 
 	@RequestMapping(value = WebUrl.CATEGORY, method = RequestMethod.GET)
 	public ResponseEntity<List<Category>> findAllCategoryList() {
-		List<Category> categoryList = categoryRepo.findAll();
-		if (categoryList!=null && !categoryList.isEmpty()) {
-			return new ResponseEntity<>(categoryList, HttpStatus.OK);
-		}
-		return new ResponseEntity(new CustomErrorType("Unable to find list"), HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(categoryRepo.findAll(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = WebUrl.CATEGORY_BY_NAME + "{categoryName}", method = RequestMethod.GET)

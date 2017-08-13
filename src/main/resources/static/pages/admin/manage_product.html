@@ -5,7 +5,7 @@
 </div>
 <br>
 <div>
-	<table class="table table-hover">
+	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<th>Product Image</th>
@@ -24,7 +24,7 @@
 			<td><button data-ng-click="removeProduct(item.productID)">X</button></td>
 		</tr>
 	</table>
-	<p align="center" data-ng-show="isGridEmpty(products)">--No Data--</p>
+	<p align="center" data-ng-show="products.length==0">--No Data--</p>
 </div>
 
 <button onclick="window.location.href='#home'">Back to Home</button>

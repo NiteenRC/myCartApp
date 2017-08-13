@@ -41,11 +41,7 @@ public class ProductController {
 		if (productList == null) {
 			return new ResponseEntity(new CustomErrorType("input is empty"), HttpStatus.NO_CONTENT);
 		}
-		List<Product> productResult = productRepo.save(productList);
-		if (productResult == null) {
-			return new ResponseEntity(new CustomErrorType("Product is not saved"), HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(productResult, HttpStatus.CREATED);
+		return new ResponseEntity<>(productRepo.save(productList), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = WebUrl.PRODUCT_AND_CATEGORYID, method = RequestMethod.POST)
@@ -100,11 +96,7 @@ public class ProductController {
 
 	@RequestMapping(value = WebUrl.PRODUCT, method = RequestMethod.GET)
 	public ResponseEntity<List<Product>> productList() {
-		List<Product> productList = productRepo.findAll();
-		if (productList != null && !productList.isEmpty()) {
-			return new ResponseEntity<>(productList, HttpStatus.OK);
-		}
-		return new ResponseEntity(new CustomErrorType("Unable to find list"), HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(productRepo.findAll(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = WebUrl.PRODUCT_BY_PRODUCTID, method = RequestMethod.GET)
@@ -145,19 +137,11 @@ public class ProductController {
 		} else {
 			productList = productRepo.findByCategoryCategoryIDOrderByPrice(categoryID);
 		}
-		if (productList != null && !productList.isEmpty()) {
-			return new ResponseEntity<>(productList, HttpStatus.OK);
-		}
-		return new ResponseEntity(new CustomErrorType("ProductID: " + categoryID + " not found."),
-				HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(productList, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = WebUrl.PRODUCTS, method = RequestMethod.GET)
 	public ResponseEntity<List<Category>> getProductsForAllCategories() {
-		List<Category> category = categoryRepo.findAll();
-		if (category == null) {
-			return new ResponseEntity(new CustomErrorType("Category list not found."), HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<>(category, HttpStatus.OK);
+		return new ResponseEntity<>(categoryRepo.findAll(), HttpStatus.OK);
 	}
 }

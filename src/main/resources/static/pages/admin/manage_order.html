@@ -1,15 +1,48 @@
-<div class="alert alert-info" data-ng-show="orders.length == 0">No
-	Orders found</div>
+
+<div class="row">
+	<div class="col-md-4">
+		<span>From</span>
+		<p class="input-group">
+			<input type="text" class="form-control" datepicker-popup="{{format}}"
+				ng-model="fromDate" is-open="opened1"
+				datepicker-options="dateOptions" ng-required="true"
+				close-text="Close" ng-change="filterOrders()" /> <span
+				class="input-group-btn">
+				<button type="button" class="btn btn-default"
+					ng-click="open1($event)">
+					<i class="glyphicon glyphicon-calendar"></i>
+				</button>
+			</span>
+		</p>
+	</div>
+	<div class="col-md-4">
+		<span>To</span>
+		<p class="input-group">
+			<input type="text" class="form-control" datepicker-popup="{{format}}"
+				ng-model="toDate" is-open="opened2" datepicker-options="dateOptions"
+				ng-required="true" close-text="Close" ng-change="filterOrders()" />
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default"
+					ng-click="open2($event)">
+					<i class="glyphicon glyphicon-calendar"></i>
+				</button>
+			</span>
+		</p>
+	</div>
+</div>
+
+<div class="alert alert-info" align="center"
+	data-ng-show="orders.length == 0">No Orders found</div>
 
 <table class="table table-bordered table-striped"
 	data-ng-show="orders.length > 0" width="685">
 	<thead>
 		<tr>
-			<th style="text-align: center;">OrderId</th>
+			<th style="text-align: center;">Order No</th>
 			<th style="text-align: center;">Order Date</th>
-			<th style="text-align: center;">OrderStatus</th>
+			<th style="text-align: center;">Order Status</th>
 			<th style="text-align: center;">Action</th>
-			<th style="text-align: center;">ChangetStatus</th>
+			<th style="text-align: center;">Changet Status</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -17,8 +50,8 @@
 			<td style="text-align: center;">{{order.orderNo}}</td>
 			<td>{{order.orderBookingDate}}</td>
 			<td>{{order.orderStatus}}</td>
-			<td><select data-ng-model="order.orderStatus" value="--choose--">
-					<option value="P" selected="selected">Placed</option>
+			<td><select data-ng-model="order.orderStatus">
+					<option value="O">Ordered</option>
 					<option value="D">Delivered</option>
 					<option value="C">Cancelled</option>
 			</select></td>

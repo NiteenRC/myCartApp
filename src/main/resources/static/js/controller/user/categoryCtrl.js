@@ -2,13 +2,15 @@ angular.module('scotchApp.category_module',
 		[ 'scotchApp.shared_module.sharedService' ]).controller(
 		'categoryController', categoryController);
 
-function categoryController($scope, $uibModal, sharedService,$location) {
+function categoryController($scope, $uibModal, sharedService, $location) {
 	'use strict';
 
 	var productUrl = "/product";
 	var categoryUrl = "/category/";
 	var CATEGORY_BY_NAME = "/category/byName/";
 	var PRODUCT_FOR_ALL_CATEGORIES = "/products/";
+
+	var vm = this;
 
 	getCategory();
 	$scope.productsByCategory = getProducts;

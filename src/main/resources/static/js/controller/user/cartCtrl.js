@@ -9,6 +9,8 @@ function cartController($scope, $rootScope, $uibModal, sharedService, $location)
 	var ORDER_LIST_SAVE = "/orders";
 	var CART_LIST_SAVE = "/carts";
 
+	$scope.carts = [];
+
 	getCarts();
 	$scope.removeCart = removeCart;
 	$scope.addToCart = addToCart
@@ -44,8 +46,8 @@ function cartController($scope, $rootScope, $uibModal, sharedService, $location)
 	$scope.orderVo = {
 		userID : parseInt($rootScope.userID),
 		purchaseOrder : $scope.order,
-		purchaseOrderDetail : $scope.purchaseOrderDetail
-	}
+		purchaseOrderDetail : $scope.carts
+	};
 
 	$scope.addToCart = addToCart;
 	$scope.placeOrder = placeOrder;
@@ -84,12 +86,14 @@ function cartController($scope, $rootScope, $uibModal, sharedService, $location)
 	}
 
 	function getCarts() {
-		sharedService.getMethod(cartUrl).then(function(response) {
-			$scope.carts = response.data;
-		}, function(error) {
-			$scope.errorMessage = 'Error while creating' + error;
-			$scope.successMessage = '';
-		});
+		sharedService.getMethod(cartUrl).then(
+				function(response) {
+					$scope.carts = response.data;
+					$scope.orderVo.purchaseOrderDetail = response.data;
+				}, function(error) {
+					$scope.errorMessage = 'Error while creating' + error;
+					$scope.successMessage = '';
+				});
 	}
 
 	function removeCart(id) {
