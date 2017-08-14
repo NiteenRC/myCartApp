@@ -31,8 +31,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = WebUrl.USER_FORGET_PASSWORD, method = RequestMethod.POST)
-	public ResponseEntity<User> passwordReset(@RequestBody String password) {
-		User userResponse = userRepo.findByUserEmail(password);
+	public ResponseEntity<User> passwordReset(@RequestBody User user) {
+		User userResponse = userRepo.save(user);
 		if (userResponse == null) {
 			return new ResponseEntity(new CustomErrorType("There is no credential for this Email id!!"),
 					HttpStatus.NOT_FOUND);

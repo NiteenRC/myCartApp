@@ -27,10 +27,12 @@ public class RatingController {
 	@Autowired
 	public RatingRepo ratingRepo;
 
-	@RequestMapping(value = WebUrl.RATING_BY_PRODUCTID, method = RequestMethod.POST)
-	public ResponseEntity<Rating> addRating(@RequestBody Rating rating, @PathVariable int productID) {
+	@RequestMapping(value = WebUrl.RATING_BY_PRODUCTID_USERID, method = RequestMethod.POST)
+	public ResponseEntity<Rating> addRating(@RequestBody Rating rating, @PathVariable int productID,
+			@PathVariable Integer userID) {
 
-		Rating userResponse = ratingRepo.findByEmailIdAndProductProductID(rating.getEmailId(), productID);
+		Rating userResponse = ratingRepo.findByEmailIdAndProductProductIDAndUserID(rating.getEmailId(), productID,
+				userID);
 		if (userResponse != null) {
 			return new ResponseEntity(new CustomErrorType("You are already rated for this product!!"),
 					HttpStatus.FOUND);
@@ -40,6 +42,7 @@ public class RatingController {
 		product.setProductID(productID);
 
 		rating.setProduct(product);
+		rating.setUserID(userID);
 		Rating cartResponse = ratingRepo.save(rating);
 		if (cartResponse == null) {
 			return new ResponseEntity(new CustomErrorType("Rating is not saved"), HttpStatus.NOT_FOUND);

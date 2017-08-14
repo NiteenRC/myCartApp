@@ -2,9 +2,10 @@ angular.module('myCart.product_select_module',
 		[ 'myCart.shared_module.sharedService' ]).controller(
 		'productSelectController', productSelectController);
 
-function productSelectController($scope,$rootScope, sharedService) {
+function productSelectController($scope,$rootScope, sharedService,$location) {
 	'use strict';
 
+	var productUrl = "/product/";
 	var cartUrl = "/cart/";
 	var RATING_URL = "/rating/";
 
@@ -29,18 +30,6 @@ function productSelectController($scope,$rootScope, sharedService) {
 		$scope.rating.star = star;
 	}
 
-	function addRating() {
-		if (!sharedService.isDefinedOrNotNull($scope.productItem.productID)) {
-			return alert('Please select Product again!!');
-		}
-		sharedService.postMethod(RATING_URL + $scope.productItem.productID,
-				$scope.rating).then(function(response) {
-			alert('Rating added successfully!!');
-		}, function(error) {
-			alert(error.data.errorMessage);
-		});
-	}
-
 	function calculateRating(rating) {
 		var newVal = 0;
 		angular.forEach(rating, function(oldVal) {
@@ -54,6 +43,34 @@ function productSelectController($scope,$rootScope, sharedService) {
 		else{
 			return Math.round(((newVal / rating.length)*100)/100)
 		}
+	}
+	
+	function selectProduct(productID) {
+		sharedService.getMethod(productUrl + productID).then(
+				function(response) {
+				   $scope.productItem = response.data;
+				   $location.path('/productSelected');
+					sharedService.store('productItem', response.data);
+				}, function(error) {
+					$scope.errorMessage = 'Error while getting: ' + error;
+					$scope.successMessage = '';
+				});
+	}
+	
+	function addRating() {
+		if (!sharedService.isDefinedOrNotNull($scope.productItem.productID)) {
+			return alert('Please select Product again!!');
+		}
+		
+		var userID1=parseInt($rootScope.userID)
+		
+		sharedService.postMethod(RATING_URL + $scope.productItem.productID+"/"+userID1,
+				$scope.rating).then(function(response) {
+					selectProduct($scope.productItem.productID);
+			alert('Rating added successfully!!');
+		}, function(error) {
+			alert(error.data.errorMessage);
+		});
 	}
 
 	function addToCart(cart) {

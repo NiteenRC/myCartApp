@@ -30,6 +30,6 @@ public interface WebUrl {
 	String ORDERS = "/orders";
 
 	String RATING = "/rating/";
-	String RATING_BY_PRODUCTID = "/rating/{productID}";
+	String RATING_BY_PRODUCTID_USERID = "/rating/{productID}/{userID}";
 
 }

@@ -23,12 +23,21 @@ public class Rating implements Serializable {
 	private int ratingID;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "RATING_FK"))
-	@JsonIgnore
+	@JsonIgnore	
 	private Product product;
 	private String firstName;
 	private String emailId;
 	private String review;
 	private String star;
+	private int userID;
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 
 	public String getFirstName() {
 		return firstName;

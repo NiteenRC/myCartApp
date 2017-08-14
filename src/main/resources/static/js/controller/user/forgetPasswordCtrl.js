@@ -30,14 +30,15 @@ function forgetPasswordController($scope, $http, $location, sharedService) {
 				});
 	}
 
-	$scope.userVo = {
+	/*$scope.userVo = {
 		userss : $scope.user,
 		userPassword : $scope.confirmPassword
-	};
+	};*/
 
 	function passwordReset() {
-		$location.path('user');
-		sharedService.postMethod(passwordURL, $scope.userVo).then(
+		//$scope.userVo.user = $scope.user;
+
+		sharedService.postMethod(passwordURL, $scope.user).then(
 				function(response) {
 					$location.path('user');
 					alert('Password changed successfully!!');

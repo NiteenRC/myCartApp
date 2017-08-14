@@ -8,5 +8,5 @@ public interface RatingRepo extends JpaRepository<Rating, Integer> {
 
 	Rating findByEmailId(String emailId);
 
-	Rating findByEmailIdAndProductProductID(String emailId, int productId);
+	Rating findByEmailIdAndProductProductIDAndUserID(String emailId, int productId,int userID);
 }
