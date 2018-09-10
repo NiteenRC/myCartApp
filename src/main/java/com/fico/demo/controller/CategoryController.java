@@ -21,7 +21,9 @@ import com.fico.demo.model.Category;
 import com.fico.demo.repo.CategoryRepo;
 import com.fico.demo.repo.ProductRepo;
 import com.fico.demo.util.Utility;
-import com.fico.demo.util.WebUrl;
+import static com.fico.demo.util.WebUrl.CART_BY_CARTID;
+import static com.fico.demo.util.WebUrl.CATEGORY;
+import static com.fico.demo.util.WebUrl.CATEGORY_BY_NAME;
 
 @RestController
 public class CategoryController {
@@ -34,7 +36,7 @@ public class CategoryController {
 	@Autowired
 	public ProductRepo productRepo;
 
-	@RequestMapping(value = WebUrl.CATEGORY, method = RequestMethod.POST)
+	@RequestMapping(value = CATEGORY, method = RequestMethod.POST)
 	public ResponseEntity<Category> addCategory(@RequestParam("categoryData") String categoryData,
 			@RequestParam("file") MultipartFile file) {
 		Category cat = new Category();
@@ -69,7 +71,7 @@ public class CategoryController {
 		return new ResponseEntity<>(category, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = WebUrl.CATEGORY + "/{categoryID}", method = RequestMethod.DELETE)
+	@RequestMapping(value = CATEGORY + "/{categoryID}", method = RequestMethod.DELETE)
 	public ResponseEntity<Category> deleteCategory(@PathVariable Integer categoryID) {
 		Category category = categoryRepo.findOne(categoryID);
 		if (category == null) {
@@ -80,12 +82,12 @@ public class CategoryController {
 		return new ResponseEntity<>(category, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.CATEGORY, method = RequestMethod.GET)
+	@RequestMapping(value = CATEGORY, method = RequestMethod.GET)
 	public ResponseEntity<List<Category>> findAllCategoryList() {
 		return new ResponseEntity<>(categoryRepo.findAll(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.CATEGORY_BY_NAME + "{categoryName}", method = RequestMethod.GET)
+	@RequestMapping(value = CATEGORY_BY_NAME + "{categoryName}", method = RequestMethod.GET)
 	public ResponseEntity<List<Category>> findByCategoryName(@PathVariable String categoryName) {
 		if (categoryName == null) {
 			return new ResponseEntity(new CustomErrorType("input is empty"), HttpStatus.NO_CONTENT);

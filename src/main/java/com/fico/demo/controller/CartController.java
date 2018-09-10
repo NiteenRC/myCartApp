@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fico.demo.exception.CustomErrorType;
 import com.fico.demo.model.Cart;
 import com.fico.demo.repo.CartRepo;
-import com.fico.demo.util.WebUrl;
+import static com.fico.demo.util.WebUrl.CART_BY_CARTID;
+import static com.fico.demo.util.WebUrl.CARTS;
+import static com.fico.demo.util.WebUrl.CART;
+import static com.fico.demo.util.WebUrl.CART_BY_USERID;
 
 @RestController
 public class CartController {
@@ -26,12 +29,12 @@ public class CartController {
 	@Autowired
 	public CartRepo cartRepo;
 
-	@RequestMapping(value = WebUrl.CARTS, method = RequestMethod.POST)
+	@RequestMapping(value = CARTS, method = RequestMethod.POST)
 	public ResponseEntity<List<Cart>> addCartList(@RequestBody List<Cart> cart) {
 		return new ResponseEntity<>(cartRepo.save(cart), HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = WebUrl.CART, method = RequestMethod.POST)
+	@RequestMapping(value = CART, method = RequestMethod.POST)
 	public ResponseEntity<Cart> addCart(@RequestBody Cart cart) {
 		Cart cart2 = cartRepo.findByProductNameAndUserID(cart.getProductName(), cart.getUserID());
 		Cart cartResponse;
@@ -47,7 +50,7 @@ public class CartController {
 		return new ResponseEntity<>(cartResponse, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = WebUrl.CART_BY_CARTID, method = RequestMethod.DELETE)
+	@RequestMapping(value = CART_BY_CARTID, method = RequestMethod.DELETE)
 	public ResponseEntity<Cart> deleteCart(@PathVariable int cartID) {
 		Cart cart = cartRepo.findOne(cartID);
 		if (cart == null) {
@@ -57,7 +60,7 @@ public class CartController {
 		return new ResponseEntity<>(cart, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.CART_BY_USERID, method = RequestMethod.GET)
+	@RequestMapping(value = CART_BY_USERID, method = RequestMethod.GET)
 	public ResponseEntity<List<Cart>> fetchCartList(@PathVariable int userID) {
 		return new ResponseEntity<>(cartRepo.findAllCartsByUserID(userID), HttpStatus.OK);
 	}

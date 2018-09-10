@@ -17,7 +17,8 @@ import com.fico.demo.exception.CustomErrorType;
 import com.fico.demo.model.Product;
 import com.fico.demo.model.Rating;
 import com.fico.demo.repo.RatingRepo;
-import com.fico.demo.util.WebUrl;
+import static com.fico.demo.util.WebUrl.RATING_BY_PRODUCTID_USERID;
+import static com.fico.demo.util.WebUrl.RATING;
 
 @RestController
 public class RatingController {
@@ -27,7 +28,7 @@ public class RatingController {
 	@Autowired
 	public RatingRepo ratingRepo;
 
-	@RequestMapping(value = WebUrl.RATING_BY_PRODUCTID_USERID, method = RequestMethod.POST)
+	@RequestMapping(value = RATING_BY_PRODUCTID_USERID, method = RequestMethod.POST)
 	public ResponseEntity<Rating> addRating(@RequestBody Rating rating, @PathVariable int productID,
 			@PathVariable Integer userID) {
 
@@ -50,7 +51,7 @@ public class RatingController {
 		return new ResponseEntity<>(cartResponse, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = WebUrl.RATING, method = RequestMethod.GET)
+	@RequestMapping(value = RATING, method = RequestMethod.GET)
 	public ResponseEntity<List<Rating>> cartList() {
 		return new ResponseEntity<>(ratingRepo.findAll(), HttpStatus.OK);
 	}

@@ -23,7 +23,12 @@ import com.fico.demo.model.Product;
 import com.fico.demo.repo.CategoryRepo;
 import com.fico.demo.repo.ProductRepo;
 import com.fico.demo.util.Utility;
-import com.fico.demo.util.WebUrl;
+import static com.fico.demo.util.WebUrl.PRODUCT_BY_CATEGORYID_SORTTYPE;
+import static com.fico.demo.util.WebUrl.PRODUCTS;
+import static com.fico.demo.util.WebUrl.PRODUCT;
+import static com.fico.demo.util.WebUrl.PRODUCT_BY_PRODUCTID;
+import static com.fico.demo.util.WebUrl.PRODUCT_AND_CATEGORYID;
+import static com.fico.demo.util.WebUrl.PRODUCT_BY_NAME_CATEGORYID_PRODUCTNAME_SORTTYPE;
 
 @RestController
 public class ProductController {
@@ -36,7 +41,7 @@ public class ProductController {
 	@Autowired
 	private CategoryRepo categoryRepo;
 
-	@RequestMapping(value = WebUrl.PRODUCTS, method = RequestMethod.POST)
+	@RequestMapping(value = PRODUCTS, method = RequestMethod.POST)
 	public ResponseEntity<List<Product>> addproduct(@RequestBody List<Product> productList) {
 		if (productList == null) {
 			return new ResponseEntity(new CustomErrorType("input is empty"), HttpStatus.NO_CONTENT);
@@ -44,7 +49,7 @@ public class ProductController {
 		return new ResponseEntity<>(productRepo.save(productList), HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT_AND_CATEGORYID, method = RequestMethod.POST)
+	@RequestMapping(value = PRODUCT_AND_CATEGORYID, method = RequestMethod.POST)
 	public ResponseEntity<Product> addproductList(@PathVariable int categoryID,
 			@RequestParam("productData") String productData, @RequestParam("file") MultipartFile file) {
 
@@ -84,7 +89,7 @@ public class ProductController {
 		return new ResponseEntity<>(product, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT_BY_PRODUCTID, method = RequestMethod.DELETE)
+	@RequestMapping(value = PRODUCT_BY_PRODUCTID, method = RequestMethod.DELETE)
 	public ResponseEntity<Product> deleteProduct(@PathVariable int productID) {
 		Product product = productRepo.findOne(productID);
 		if (product != null) {
@@ -94,12 +99,12 @@ public class ProductController {
 		return new ResponseEntity(new CustomErrorType("ProductID: " + productID + " not found."), HttpStatus.NOT_FOUND);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT, method = RequestMethod.GET)
+	@RequestMapping(value = PRODUCT, method = RequestMethod.GET)
 	public ResponseEntity<List<Product>> productList() {
 		return new ResponseEntity<>(productRepo.findAll(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT_BY_PRODUCTID, method = RequestMethod.GET)
+	@RequestMapping(value = PRODUCT_BY_PRODUCTID, method = RequestMethod.GET)
 	public ResponseEntity<Product> getProductsById(@PathVariable int productID) {
 		Product product = productRepo.findOne(productID);
 		if (product == null) {
@@ -109,7 +114,7 @@ public class ProductController {
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT_BY_NAME_CATEGORYID_PRODUCTNAME_SORTTYPE, method = RequestMethod.GET)
+	@RequestMapping(value = PRODUCT_BY_NAME_CATEGORYID_PRODUCTNAME_SORTTYPE, method = RequestMethod.GET)
 	public ResponseEntity<List<Product>> getProductsByCategoryIDAndProductName(@PathVariable Integer categoryID,
 			@PathVariable String productName, @PathVariable String sortType) {
 		List<Product> product;
@@ -126,7 +131,7 @@ public class ProductController {
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCT_BY_CATEGORYID_SORTTYPE, method = RequestMethod.GET)
+	@RequestMapping(value = PRODUCT_BY_CATEGORYID_SORTTYPE, method = RequestMethod.GET)
 	public ResponseEntity<List<Product>> getProductsByCategoryId(@PathVariable Integer categoryID,
 			@PathVariable String sortType) {
 		List<Product> productList;
@@ -140,7 +145,7 @@ public class ProductController {
 		return new ResponseEntity<>(productList, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.PRODUCTS, method = RequestMethod.GET)
+	@RequestMapping(value = PRODUCTS, method = RequestMethod.GET)
 	public ResponseEntity<List<Category>> getProductsForAllCategories() {
 		return new ResponseEntity<>(categoryRepo.findAll(), HttpStatus.OK);
 	}

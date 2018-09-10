@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fico.demo.exception.CustomErrorType;
 import com.fico.demo.model.User;
 import com.fico.demo.repo.UserRepo;
-import com.fico.demo.util.WebUrl;
+import static com.fico.demo.util.WebUrl.USER_FORGET_PASSWORD_EMAILID;
+import static com.fico.demo.util.WebUrl.USER_FORGET_PASSWORD;
+import static com.fico.demo.util.WebUrl.USER;
+import static com.fico.demo.util.WebUrl.USER_BY_EMAILID_PASSWORD;
 
 @RestController
 public class UserController {
@@ -20,7 +23,7 @@ public class UserController {
 	@Autowired
 	private UserRepo userRepo;
 
-	@RequestMapping(value = WebUrl.USER_FORGET_PASSWORD_EMAILID, method = RequestMethod.POST)
+	@RequestMapping(value = USER_FORGET_PASSWORD_EMAILID, method = RequestMethod.POST)
 	public ResponseEntity<User> forgetPassword(@PathVariable String emailId) {
 		User userResponse = userRepo.findByUserEmail(emailId);
 		if (userResponse == null) {
@@ -30,7 +33,7 @@ public class UserController {
 		return new ResponseEntity<>(userResponse, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.USER_FORGET_PASSWORD, method = RequestMethod.POST)
+	@RequestMapping(value = USER_FORGET_PASSWORD, method = RequestMethod.POST)
 	public ResponseEntity<User> passwordReset(@RequestBody User user) {
 		User userResponse = userRepo.save(user);
 		if (userResponse == null) {
@@ -40,7 +43,7 @@ public class UserController {
 		return new ResponseEntity<>(userResponse, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.USER, method = RequestMethod.POST)
+	@RequestMapping(value = USER, method = RequestMethod.POST)
 	public ResponseEntity<User> registerNewUser(@RequestBody User user) {
 		if (user.getUserName() == null) {
 			return new ResponseEntity(new CustomErrorType("UserName is mandatory!!"), HttpStatus.NOT_FOUND);
@@ -54,7 +57,7 @@ public class UserController {
 		return new ResponseEntity<>(userResponse, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = WebUrl.USER_BY_EMAILID_PASSWORD, method = RequestMethod.POST)
+	@RequestMapping(value = USER_BY_EMAILID_PASSWORD, method = RequestMethod.POST)
 	public ResponseEntity<User> checkUserCredentials(@RequestBody User user) {
 		User userResponse = userRepo.findByUserEmailAndUserPassword(user.getUserEmail(), user.getUserPassword());
 		if (userResponse == null) {
