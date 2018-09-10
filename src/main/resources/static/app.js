@@ -1,4 +1,4 @@
-angular.module('myCart', [ 'ngRoute', 
+angular.module('myCart', [ 'ngRoute',
 	    'ngCookies',
 		'ui.bootstrap',
 		'myCart.user_module',
