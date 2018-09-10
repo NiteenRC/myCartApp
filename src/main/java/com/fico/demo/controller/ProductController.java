@@ -33,7 +33,7 @@ import static com.fico.demo.util.WebUrl.PRODUCT_BY_NAME_CATEGORYID_PRODUCTNAME_S
 @RestController
 public class ProductController {
 
-	public static final Logger log = LoggerFactory.getLogger(ProductController.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
 	@Autowired
 	public ProductRepo productRepo;
@@ -43,6 +43,8 @@ public class ProductController {
 
 	@RequestMapping(value = PRODUCTS, method = RequestMethod.POST)
 	public ResponseEntity<List<Product>> addproduct(@RequestBody List<Product> productList) {
+        LOGGER.info("addproduct ");
+        LOGGER.debug("aaa ");
 		if (productList == null) {
 			return new ResponseEntity(new CustomErrorType("input is empty"), HttpStatus.NO_CONTENT);
 		}
@@ -70,7 +72,7 @@ public class ProductController {
 			byte[] bytes = file.getBytes();
 			prod.setImage(bytes);
 		} catch (IOException e) {
-			log.error("File is failed to save ", e);
+            LOGGER.error("File is failed to save ", e);
 			return new ResponseEntity(new CustomErrorType("File is failed to save" + e), HttpStatus.BAD_REQUEST);
 		}
 

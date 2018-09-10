@@ -8,6 +8,16 @@ spring.jmx:
 spring.thymeleaf:
    cache:false
 
+spring.logging:
+  level:
+    org.springframework.web: INFO
+    com.fico: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: /home/nc/workspace/fico/myCartApp/src/main/resources/application.log
+
+
 #spring.datasource:
 #    driverClassName: org.h2.Driver
 #    url: jdbc:h2:mem:bootexample;MODE=MySQL;DB_CLOSE_ON_EXIT=TRUE;
