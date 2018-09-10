@@ -2,19 +2,17 @@
 ### This is the main way to configure the application (other than annotations).
 ### This fils is in Yaml format but you can also do this using the traditional
 ### Java properties file.
-spring.jmx:
-   enabled: false
-   
-spring.thymeleaf:
-   cache:false
+spring:jmx.enabled: false
+
+spring.thymeleaf.cache: false
 
 spring.logging:
   level:
-    org.springframework.web: INFO
-    com.fico: INFO
+      org.springframework.web: INFO
+      com.fico: INFO
   pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+      console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+      file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file: /home/nc/workspace/fico/myCartApp/src/main/resources/application.log
 
 
